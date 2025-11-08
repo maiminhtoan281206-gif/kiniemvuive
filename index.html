@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kỉ Niệm Của Hai Đứa 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    /* Ẩn thanh cuộn dọc và ngang */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/* Dành cho Firefox */
+* {
+  scrollbar-width: none;
+}
+
+    :root {
+        --color-env: #FFB7C5;
+        --color-env2: #ff9aad;
+        --color-flap: #ff8da1;
+        --color-bg: #ed7fca;
+        --color-heart: #ff85a2;
+        --color-sparkle: #fff;
+        --wax-red: #c04040;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(#ffd6e8, #ffb3c1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Playfair Display", serif;
+      overflow: hidden;
+      position: relative;
+      animation: fadeInPage 2s ease-in-out;
+    }
+
+    @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ☁️ Mây */
+    .cloud {
+      position: absolute;
+      top: 50px;
+      left: -200px;
+      height: 150px;
+      width: 300px;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 100px 20px #fff, 200px 40px #fff, 300px 10px #fff, 400px 30px #fff;
+      opacity: 0.8;
+      animation: moveCloud 60s linear infinite, fadeInCloud 3s ease forwards;
+    }
+    .cloud:nth-child(2) { top: 150px; left: -400px; opacity: 0.6; animation-duration: 80s; transform: scale(1.2); }
+    .cloud:nth-child(3) { top: 250px; left: -600px; opacity: 0.7; animation-duration: 100s; transform: scale(0.9); }
+
+    @keyframes moveCloud { from { left: -600px; } to { left: 110%; } }
+    @keyframes fadeInCloud { from { opacity: 0; } to { opacity: 0.8; } }
+
+    /* 💗 Tim bay */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      width: 25px; height: 25px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: floatHeart 8s linear infinite;
+      opacity: 0.8;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 25px; height: 25px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before { top: -12px; left: 0; }
+    .heart::after { left: -12px; top: 0; }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0.8; }
+      100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+    }
+
+    /* ✨ Đom đóm */
+    .firefly {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: radial-gradient(circle, #fff, #ffb6c1 50%, transparent 70%);
+      border-radius: 50%;
+      box-shadow: 0 0 10px #fff, 0 0 20px #ffb6c1;
+      opacity: 0.8;
+      animation: flicker 2s infinite alternate, moveFirefly 25s linear infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+    @keyframes moveFirefly {
+      from { transform: translate(0, 0); }
+      to { transform: translate(100vw, -100vh); }
+    }
+
+    /* 🔐 Màn hình khóa */
+    .lock-screen {
+      text-align: center;
+      z-index: 5;
+      background-color: rgba(255, 255, 255, 0.3);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: scale(0.95);
+      animation: fadeInLock 1.5s ease forwards 1s;
+    }
+    @keyframes fadeInLock { from { opacity: 0; transform: scale(0.95);} to { opacity: 1; transform: scale(1);} }
+
+    h2 { color: #d63384; margin-bottom: 20px; }
+
+    .dots { display: flex; justify-content: center; margin: 20px 0; }
+    .dot {
+      width: 15px; height: 15px; margin: 0 8px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 2px solid #d63384;
+      transition: background 0.2s;
+    }
+    .dot.filled { background-color: #d63384; }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 70px);
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .btn {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: white; color: #d63384;
+      border: none; font-size: 24px; font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .btn:active { transform: scale(0.95); background-color: #ffe6f0; }
+
+    /* 🌸 Trang chính */
+    #main-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #d63384;
+      transform: translateY(-200px);
+    }
+
+    .day-circle-wrapper {
+      position: relative;
+      width: 250px; height: 250px;
+    }
+    .day-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      --angle: 0deg;
+      --color: #ffffff;
+      background: conic-gradient(var(--color) var(--angle), transparent var(--angle));
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+      transition: background 0.05s linear;
+    }
+    .day-circle {
+      position: absolute;
+      inset: 4px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 25px rgba(255, 192, 203, 0.6);
+    }
+    .circle-text-top, .circle-text-bottom {
+      font-size: 20px;
+      color: #d63384;
+    }
+    .circle-days {
+      font-size: 50px;
+      font-weight: 600;
+      color: #d63384;
+    }
+
+    .menu-buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 20px;
+    }
+    .menu-btn {
+      background: white;
+      color: #d63384;
+      border: 2px solid #ffb6c1;
+      border-radius: 15px;
+      padding: 10px 15px;
+      font-size: 22px;
+      transition: all 0.3s ease;
+    }
+    .menu-btn:hover {
+      background: #ffd6e8;
+      transform: scale(1.05);
+    }
+
+    /* 🩷 Popup hiển thị nội dung */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadePopup 0.4s ease;
+    }
+    @keyframes fadePopup { from {opacity: 0;} to {opacity: 1;} }
+
+    .popup-box {
+      background: #fff0f5;
+      border: 2px solid #ffb6c1;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255,182,193,0.9);
+      width: 90%;        /* khung chiếm nhiều hơn màn hình */
+      max-width: 900px;  /* khung lớn hơn trên máy tính */
+      padding: 30px;     /* viền trong rộng hơn */
+      text-align: center;
+      position: relative;
+      animation: showUp 0.5s ease;
+      overflow-y: auto;      /*  thêm dòng này để cuộn dọc */
+      max-height: 80vh;      /*  giới hạn chiều cao để không tràn màn hình */
+    }
+    .popup-box p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  line-height: 1.7;
+}
+
+    @keyframes showUp {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 28px;
+      color: #ff6fa5;
+      cursor: pointer;
+    }
+
+.album {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* tăng kích thước ảnh */
+  gap: 20px; /* khoảng cách giữa các ảnh */
+  margin-top: 15px;
+  justify-items: center; /* canh giữa mỗi ảnh trong ô */
+}
+
+.album img {
+  width: 100%;
+  height: auto;
+  max-height: 250px; /* giới hạn chiều cao để đồng đều */
+  object-fit: contain; /* hiển thị hết ảnh, không cắt */
+  border-radius: 12px; /* bo góc nhẹ */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+    /* 💓 Hiệu ứng đập tim cho vòng tròn */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 192, 203, 0.6); }
+  50% { transform: scale(1.04); box-shadow: 0 0 45px rgba(255, 182, 193, 0.9); }
+}
+.day-circle.pulse {
+  animation: pulse 5s ease-in-out infinite; /* ⏱ tốc độ nhịp - giá trị lớn hơn sẽ “nhẹ” hơn */
+}
+
+.day-circle.pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+    .envlope-wrapper {
+        height: 380px;
+        margin-top: 50px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    #envelope {
+        position: relative;
+        width: 380px;
+        height: 240px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        margin: 0 auto;
+        top: 150px;
+        background-color: var(--color-flap);
+        box-shadow: 0 4px 20px rgba(0,0,0,.1);
+        cursor: pointer;
+    }
+
+    .front {
+        position: absolute;
+        width: 0;
+        height: 0;
+        z-index: 3;
+    }
+
+    .flap {
+        border-left: 190px solid transparent;
+        border-right: 190px solid transparent;
+        border-bottom: 92px solid transparent;
+        border-top: 150px solid var(--color-flap);
+        transform-origin: top;
+        pointer-events: none;
+    }
+
+    .pocket {
+        border-left: 190px solid var(--color-env);
+        border-right: 190px solid var(--color-env);
+        border-bottom: 90px solid var(--color-env2);
+        border-top: 150px solid transparent;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    .letter {
+        position: relative;
+        background-color: #e0d9dd;
+        width: 95%;
+        margin: 0 auto;
+        height: 95%;
+        top: 0%;
+        border-radius: 6px;
+        box-shadow: 0 2px 26px rgba(0,0,0,.08);
+        padding: 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .letter:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: linear-gradient(180deg, 
+            rgba(255,255,255,0.00) 25%, 
+            rgba(255,231,236,0.70) 55%, 
+            rgba(255,231,236,1.00) 100%);
+        pointer-events: none;
+    }
+
+    .message {
+        position: relative;
+        z-index: 2;
+        font-family: 'Pacifico', cursive;
+        color: #d46a84;
+        text-align: center;
+        line-height: 1.4;
+        padding: 5px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .message p {
+        margin: 10px 0;
+        font-size: 1.4em;
+        text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+
+    .lyrics {
+        display: none;
+        font-size: 1em;
+        line-height: 1.5;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s ease-in;
+        max-height: 130px;
+        overflow-y: auto;
+    }
+
+    .lyric-page {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .lyric-page.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .open .flap {
+        transform: rotateX(180deg);
+        transition: transform 0.4s ease, z-index 0.6s;
+        z-index: 1;
+    }
+
+    .close .flap {
+        transform: rotateX(0deg);
+        transition: transform 0.4s 0.6s ease, z-index 1s;
+        z-index: 5;
+    }
+
+    .close .letter {
+        transform: translateY(0px); 
+        transition: transform 0.4s ease, z-index 1s;
+        z-index: 1;
+    }
+
+    .open .letter {
+        transform: translateY(-60px) rotate(-2deg);
+        transition: transform 0.4s 0.6s ease, z-index 0.6s;
+        z-index: 2;
+    }
+
+    .letter-corner {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ffd1dc;
+        border-radius: 5px;
+        z-index: 3;
+    }
+
+    .corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+    .corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+    .hearts, .sparkles {
+        position: absolute;
+        top: 90px;
+        left: 0;
+        right: 0;
+        z-index: 2;
+    }
+
+    .heart, .sparkle {
+        position: absolute;
+        bottom: 0;
+        pointer-events: none;
+    }
+
+    .heart:before,
+    .heart:after {
+        content: "";
+        position: absolute;
+        left: 25px;
+        top: 0;
+        width: 25px;
+        height: 40px;
+        background: var(--color-heart);
+        border-radius: 25px 25px 0 0;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
+
+    .heart:after {
+        left: 0;
+        transform: rotate(45deg);
+        transform-origin: 100% 100%;
+    }
+
+    .sparkle {
+        width: 8px;
+        height: 8px;
+        background: var(--color-sparkle);
+        border-radius: 50%;
+        animation: sparkleTwinkle 1s infinite;
+    }
+
+    .close .heart,
+    .close .sparkle {
+        opacity: 0;
+        animation: none;
+    }
+
+    .a1 { left: 20%; transform: scale(0.6); animation: slideUp 4s linear infinite, sideSway 2s ease-in-out infinite alternate; }
+    .a2 { left: 55%; animation: slideUp 5s linear infinite, sideSway 4s ease-in-out infinite alternate; }
+    .a3 { left: 10%; transform: scale(0.8); animation: slideUp 7s linear infinite, sideSway 2s ease-in-out infinite alternate; }
+
+    .s1 { left: 30%; animation: sparkleUp 3s linear infinite; }
+    .s2 { left: 60%; animation: sparkleUp 4s linear infinite; }
+    .s3 { left: 45%; animation: sparkleUp 5s linear infinite; }
+
+    @keyframes slideUp {
+        0% { top: 0; }
+        100% { top: -600px; }
+    }
+
+    @keyframes sideSway {
+        0% { margin-left: 0; }
+        50% { margin-left: 50px; }
+        100% { margin-left: 0; }
+    }
+
+    @keyframes sparkleUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-500px) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes sparkleTwinkle {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.5); }
+    }
+
+    .controls {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .controls button {
+        font-weight: 600;
+        transition: all 0.3s ease;
+        background-color: var(--color-env);
+        border: 2px solid var(--color-env2);
+        border-radius: 20px;
+        color: white;
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        font-family: Arial, sans-serif;
+    }
+
+    .controls button:hover {
+        background-color: var(--color-env2);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 7px 25px rgba(0,0,0,0.2);
+    }
+
+    .open .lyrics {
+        display: block;
+        opacity: 1;
+    }
+
+    .page-indicator {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 0.8em;
+        color: #d46a84;
+        opacity: 0.7;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ☁️ Mây -->
+  <div class="cloud"></div><div class="cloud"></div><div class="cloud"></div>
+
+  <!-- 💗 Tim bay -->
+  <script>
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (6 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 9000);
+    }, 500);
+  </script>
+
+  <!-- 🔐 Màn hình khóa -->
+  <div id="lock" class="lock-screen">
+    <h2>Nhập Kỉ Niệm Yêu Nhau 💗</h2>
+    <div class="dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="keypad">
+      <button class="btn">1</button><button class="btn">2</button><button class="btn">3</button>
+      <button class="btn">4</button><button class="btn">5</button><button class="btn">6</button>
+      <button class="btn">7</button><button class="btn">8</button><button class="btn">9</button>
+      <button class="btn">←</button><button class="btn">0</button><button class="btn">✔</button>
+    </div>
+  </div>
+
+  <!-- 🌸 Trang chính -->
+  <div id="main-content">
+    <div class="day-circle-wrapper">
+      <div class="day-ring"></div>
+      <div class="day-circle">
+        <div class="circle-text-top">Đang Yêu</div>
+        <div class="circle-days" id="dayCounter">0</div>
+        <div class="circle-text-bottom">Ngày</div>
+      </div>
+    </div>
+
+    <div class="menu-buttons">
+      <button class="menu-btn" data-target="photo">📸</button>
+      <button class="menu-btn" data-target="letter">💌</button>
+      <button class="menu-btn" data-target="gift">🎁</button>
+    </div>
+  </div>
+
+  <!-- 💖 Popup -->
+  <div id="popupOverlay" class="popup-overlay">
+    <div class="popup-box">
+      <span id="closePopup" class="close-btn">&times;</span>
+      <div id="popupContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const password = "2609";
+    const startDate = new Date("2025-09-26");
+    let input = "";
+    const dots = document.querySelectorAll(".dot");
+    const buttons = document.querySelectorAll(".btn");
+    const lock = document.getElementById("lock");
+    const mainContent = document.getElementById("main-content");
+    const dayCounter = document.getElementById("dayCounter");
+    const dayRing = document.querySelector(".day-ring");
+    const dayCircle = document.querySelector(".day-circle");
+
+    function showFireflies() {
+      for (let i = 0; i < 50; i++) {
+        const firefly = document.createElement("div");
+        firefly.className = "firefly";
+        firefly.style.top = Math.random() * 100 + "vh";
+        firefly.style.left = Math.random() * 100 + "vw";
+        firefly.style.animationDelay = Math.random() * 3 + "s";
+        document.body.appendChild(firefly);
+      }
+    }
+
+    function resetInput() {
+      input = "";
+      dots.forEach(dot => dot.classList.remove("filled"));
+    }
+
+    function checkPassword() {
+      if (input === password) {
+        lock.style.display = "none";
+        mainContent.style.display = "flex";
+        startAnimation();
+        showFireflies();
+      } else {
+        alert("Sai mật khẩu rồi 😢");
+        resetInput();
+      }
+    }
+
+    function getDayCount() {
+      const today = new Date();
+      const diffTime = today - startDate;
+      return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    function startAnimation() {
+      const finalDays = getDayCount();
+      const duration = 5000;
+      const startTime = performance.now();
+
+      function animate(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const angle = 360 * progress;
+        const currentDays = Math.floor(finalDays * progress);
+
+        let r = 255, g = 255, b = 255;
+        if (progress > 0.5) {
+          const t = (progress - 0.5) / 0.5;
+          r = 255 - (255 - 245) * t;
+          g = 255 - (255 - 160) * t;
+          b = 255 - (255 - 200) * t;
+        }
+        const color = `rgb(${r},${g},${b})`;
+
+        dayRing.style.setProperty("--angle", `${angle}deg`);
+        dayRing.style.setProperty("--color", color);
+        dayCounter.textContent = currentDays;
+
+        if (progress < 1) requestAnimationFrame(animate);
+        else {
+          dayRing.style.setProperty("--angle", "360deg");
+          dayRing.style.setProperty("--color", "#f4a1c2");
+          dayRing.style.boxShadow = "0 0 40px rgba(255,192,203,0.9)";
+          dayCircle.classList.add("pulse");
+          dayCounter.textContent = finalDays;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const val = btn.textContent.trim();
+
+        if (!isNaN(val)) {
+          if (input.length < 4) {
+            input += val;
+            dots[input.length - 1].classList.add("filled");
+            if (input.length === 4) setTimeout(checkPassword, 200);
+          }
+        } else if (val === "←") {
+          if (input.length > 0) {
+            dots[input.length - 1].classList.remove("filled");
+            input = input.slice(0, -1);
+          }
+        } else if (val === "✔") {
+          if (input.length < 4 || input !== password) {
+            alert("Sai mật khẩu rồi 😢");
+            resetInput();
+          } else checkPassword();
+        }
+      });
+    });
+
+    /* ✨ Popup xử lý hiển thị nội dung */
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupContent = document.getElementById("popupContent");
+    const closePopup = document.getElementById("closePopup");
+
+    const photoContent = `
+      <h2>💞 Nơi Lưu Giữ Kỉ Niệm 💞</h2>
+      <div class="album">
+        <img src="./img/23.jpg">
+        <img src="./img/24.jpg">
+        <img src="./img/25.jpg">
+        <img src="./img/27.jpg">
+        <img src="./img/16.jpg">
+        <img src="./img/18.jpg">
+        <img src="./img/12.jpg">
+        <img src="./img/6.jpg">
+        <img src="./img/13.jpg">
+        <img src="./img/20.jpg">
+        <img src="./img/1.jpg">
+        <img src="./img/2.jpg">
+        <img src="./img/3.jpg">
+        <img src="./img/4.jpg">
+        <img src="./img/5.jpg">
+        <img src="./img/7.jpg">
+        <img src="./img/8.jpg">
+        <img src="./img/9.jpg">
+        <img src="./img/10.jpg">
+        <img src="./img/11.jpg">
+        <img src="./img/14.jpg">
+        <img src="./img/17.jpg">
+        <img src="./img/19.jpg">
+        <img src="./img/21.jpg">
+        <img src="./img/22.jpg">
+        <img src="./img/26.jpg">
+        
+
+
+      </div>
+    `;
+
+const letterContent = `
+      <h2>💌 Lá Thư Gửi Em 💌</h2>
+      <p style="white-space: pre-line; color: #d63384;">Anh từng nghĩ tình yêu chỉ là những cảm xúc vui vẻ với nhau, nhưng từ khi gặp em, mọi thứ trong anh như thay đổi hoàn toàn. Em khiến cuộc sống của anh trở nên ấm áp, dịu dàng, và đầy màu sắc ý nghĩa hơn. Mỗi sáng thức dậy, điều đầu tiên anh muốn làm là nhắn cho em vài dòng; mỗi tối trước khi ngủ là chúc em ngủ thật là ngoannn.
+Anh vẫn nhớ rõ từng kỷ niệm của chúng ta những buổi hẹn đầu tiên, những lần ngồi cùng nhau, ngồi bên nhau luyên thuyên suốt cả ngày không biết chán là gì.. Có những hôm trời mưa chúng ta đi với nhau anh cảm nhận được đã có người đi cùng anh vào những trời mưa chứ không riêng gì trời nắng và chính khoảnh khắc ấy anh chỉ muốn che chở cho em. Những buổi đi chơi, những lần cùng nhau đi ăn, cùng nhau chụp những tấm ảnh tất cả đều là những mảnh ghép nhỏ, tạo nên bức tranh tình yêu của riêng chúng ta.
+Ngày kỷ niệm của chúng ta, dù chỉ là một ngày bình thường của người khác, nhưng với anh, nó luôn là một ngày thật đặc biệt của riêng anh và em. Anh không cần những món quà xa hoa hay lời hứa hoa mỹ, chỉ cần được nắm tay em, cùng nhìn lại chặng đường đã qua, cùng cười vì những lần giận dỗi vu vơ rồi lại làm hòa. Anh biết, tình yêu không chỉ là những lời nói ngọt ngào, mà là sự cố gắng, là niềm tin, là cách cả hai cùng nhau vượt qua những khó khăn và không buông tay dù có chuyện gì xảy ra.
+Anh hứa với em, dù có những lúc cuộc sống khiến anh mệt mỏi, anh vẫn sẽ luôn cố gắng tình yêu mà em dành cho anh. Nơi mà em có thể tựa vào vai anh mỗi khi yếu lòng, và anh có thể nhìn thấy em mỉm cười trong bình yên. Anh không dám hứa rằng mọi thứ sẽ luôn dễ dàng, nhưng anh dám chắc rằng anh không muốn buông tay em nữa, sẽ cùng em đi qua những khó khăn, cùng nhau trưởng thành.
+Cảm ơn em đã cho anh một cơ hội, đã yêu anh bằng một trái tim chân thành đến vậy. Anh chỉ mong thời gian trôi thật chậm để mỗi ngày được ở bên em thêm, yêu em thêm, quan tâm em thêm nữa. Anh muốn cùng em đi hết quãng đường còn lại, muốn cùng em đón những mùa lễ, những sinh nhật.
+Dù tương lai có ra sao, anh vẫn tin rằng: chỉ cần chúng ta không buông tay, thì mọi điều đều có thể. Anh sẽ mãi là người luôn ở phía sau, âm thầm dõi theo, yêu thương, và đợi em người con gái mà anh luôn xem là cả thế giới.
+Anh yêu em yêu bằng tất cả những gì anh có, yêu em hết tất cả bốn mùa,xuân,hạ,thu,và cả đông.
+Thương em thật nhiều,
+ ❤️</p>
+    `;
+
+ const giftContent = `
+  <h2>🎉 Chúc Em Sinh Nhật Vui Vẻ 💕</h2>
+  <p style="font-size: 24px; color: #d63384; font-family: 'Dancing Script', cursive;">
+    Chúc em có một ngày sinh nhật thật hạnh phúc, luôn tươi cười, xinh đẹp và được yêu thương thật nhiều 💖<br>
+    Mỗi khoảnh khắc đều đáng nhớ, và anh mong hôm nay sẽ là một kỉ niệm thật đẹp của em 🎂✨
+  </p>
+
+  <div style="margin-top: 25px;">
+    <audio id="birthdayMusic" controls>
+      <source src="hpbd.mp3" type="audio/mpeg">
+      Trình duyệt của bạn không hỗ trợ phát nhạc.
+    </audio>
+    <p style="margin-top: 8px; font-size: 18px; color: #d63384;">Anh có một món quà dành tặng cho em nữa 💝</p>
+  </div>
+`;
+
+    const contentMap = {
+      photo: photoContent,
+      letter: letterContent,
+      gift: giftContent
+    };
+
+    document.querySelectorAll(".menu-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        popupContent.innerHTML = contentMap[target];
+        popupOverlay.style.display = "flex";
+        // ⚙️ Kích hoạt script bên trong nội dung popup
+const scripts = popupContent.querySelectorAll("script");
+scripts.forEach(oldScript => {
+  const newScript = document.createElement("script");
+  if (oldScript.textContent) newScript.textContent = oldScript.textContent;
+  oldScript.replaceWith(newScript);
+});
+
+      });
+    });
+
+    // ⚙️ Nút đóng popup
+    closePopup.addEventListener("click", () => {
+      popupOverlay.style.display = "none";
+    });
+
+    // Đóng popup khi click ra ngoài khung nội dung
+    popupOverlay.addEventListener("click", (e) => {
+      if (e.target === popupOverlay) popupOverlay.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
